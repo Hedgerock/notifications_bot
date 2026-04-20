@@ -18,8 +18,12 @@ export async function getRows(){
         });
 
     const page = await browser.newPage();
-    await page.goto(ScrapperWebsiteConstants.WEBSITE_URL, { waitUntil: "networkidle2" });
-    await page.waitForSelector(ScrapperWebsiteConstants.SELECTOR_FOR_WAIT);
+    await page.goto(ScrapperWebsiteConstants.WEBSITE_URL, { waitUntil: "domcontentloaded", timeout:60_000 });
+
+    await page.waitForSelector(ScrapperWebsiteConstants.SELECTOR_FOR_WAIT, {
+        timeout: 60_000,
+        visible: true
+    });
 
     const rows = await initRows(page);
 
