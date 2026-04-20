@@ -5,10 +5,10 @@ export
 
 shutdown:
 	@bash scripts/shutdown.sh
-	@docker compose down
+	@docker-compose down
 
 turnUp:
-	@docker compose up --build -d
+	@docker-compose up --build -d
 	@bash scripts/turnup.sh
 
 restart: shutdown turnUp

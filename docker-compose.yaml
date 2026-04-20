@@ -3,7 +3,7 @@ services:
     container_name: notifications_server
     build: server/.
     ports:
-      - ${SERVER_PORT}
+      - "${SERVER_PORT}:3000"
     environment:
       PG_HOST: ${POSTGRES_HOST}
       PG_USER: ${POSTGRES_USER}
@@ -46,7 +46,7 @@ services:
       timeout: 5s
       retries: 5
     ports:
-      - ${DATABASE_PORT}
+      - "${DATABASE_PORT}:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
 
@@ -64,7 +64,7 @@ services:
     image: redis:7
     restart: always
     ports:
-      - ${REDIS_PORT}
+      - "${REDIS_PORT}:6379"
 
 volumes:
   pgdata:
