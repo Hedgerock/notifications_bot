@@ -1,0 +1,70 @@
+services:
+  server:
+    container_name: notifications_server
+    build: server/.
+    ports:
+      - ${SERVER_PORT}
+    environment:
+      PG_HOST: ${POSTGRES_HOST}
+      PG_USER: ${POSTGRES_USER}
+      PG_PASSWORD: ${POSTGRES_PASSWORD}
+      PG_DATABASE: ${POSTGRES_DATABASE}
+      PG_PORT: ${POSTGRES_PORT}
+      REDIS_URL: ${REDIS_URL}
+      TELEGRAM_TOKEN: ${TELEGRAM_TOKEN}
+      ADMIN_USER: ${ADMIN_USER}
+      ADMIN_PASS: ${ADMIN_PASS}
+      JWT_SECRET: ${JWT_SECRET}
+      WEBSITE_URL: ${WEBSITE_URL}
+      SELECTOR_FOR_WAIT: ${SELECTOR_FOR_WAIT}
+      SELECTOR_TO_WORK: ${SELECTOR_TO_WORK}
+      BUTTON_FOR_TOMORROW_SCHEDULE: ${BUTTON_FOR_TOMORROW_SCHEDULE}
+      STATUS_ENABLE: ${STATUS_ENABLE}
+      STATUS_PROBABLY: ${STATUS_PROBABLY}
+      STATUS_OFF: ${STATUS_OFF}
+      STATUS_SURE_OFF: ${STATUS_SURE_OFF}
+      QUEUE_LIMIT_MAX: ${QUEUE_LIMIT_MAX}
+      QUEUE_LIMIT_DURATION: ${QUEUE_LIMIT_DURATION}
+    depends_on:
+      db:
+        condition: service_healthy
+      flyway:
+        condition: service_completed_successfully
+      redis:
+        condition: service_started
+  db:
+    container_name: notifications_db
+    image: postgres:15
+    restart: always
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DATABASE}
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DATABASE}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    ports:
+      - ${DATABASE_PORT}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  flyway:
+    container_name: notifications_flyway
+    image: flyway/flyway:10
+    command: -url=jdbc:postgresql://db:${POSTGRES_PORT}/${POSTGRES_DATABASE} -user=${POSTGRES_USER} -password=${POSTGRES_PASSWORD} -locations=filesystem:/flyway/sql migrate
+    volumes:
+      - ./migrations:/flyway/sql
+    depends_on:
+      - db
+
+  redis:
+    container_name: notifications_redis
+    image: redis:7
+    restart: always
+    ports:
+      - ${REDIS_PORT}
+
+volumes:
+  pgdata:

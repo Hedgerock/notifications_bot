@@ -1,0 +1,47 @@
+:root {
+    --selectedValueColor: #3B82F6;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.table-head {
+    background: white;
+    font-size: 1.5rem
+}
+
+.table-row-box {
+    font-size: 1.4rem;
+    text-align: center;
+}
+
+.table-row-box__time {
+    background: white
+}
+
+.table-row-box__cell {
+    color: #574646;
+    font-weight: bold;
+}
+
+.table-row-box__time,
+.table-row-box__cell {
+    border: 2px solid silver;
+    border-radius: .2rem;
+    padding: .2rem;
+}
+
+.table-row-box__time_current,
+.table-row-box__cell_current {
+    border: 3px solid var(--selectedValueColor);
+    animation: pulse-glow 2.5s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+    0%   { box-shadow: 0 0 0 var(--selectedValueColor); }
+    50%  { box-shadow: 0 0 18px var(--selectedValueColor); }
+    100% { box-shadow: 0 0 0 var(--selectedValueColor); }
+}

@@ -1,0 +1,52 @@
+//Cases
+export const CASE_SUCCESS_STATUS_RESPONSE_OPTION = "done_";
+export const CASE_SELECT_ALL_STATUS_OPTION = "all_";
+export const CASE_REMOVE_ALL_STATUS_OPTION = "removeAll_";
+export const CASE_NOOP_STATUS_OPTION = "noop";
+export const CASE_SUBSCRIPTION_DECISION_OPTION = "subscriptionDecision_";
+export const CASE_SUBSCRIBED_OPTION = "subscribed_";
+export const CASE_UNSUBSCRIBED_OPTION = "unsubscribed_";
+export const CASE_GROUP_SELECTION_OPTION = "group_";
+export const CASE_CURRENT_QUEUE_SELECTION_OPTION = "current_queue_";
+export const CASE_BACK_PREVIOUS_POSITION_OPTION = "back_";
+export const CASE_CLOSE_OPTION = "close";
+export const CASE_SPECIFIC_UPDATE_OPTION = "update_"
+export const CASE_SPECIFIC_SUBSCRIPTION_OPTION = "subscriptionUpdate_"
+export const CASE_SPECIFIC_TIME_UPDATE_OPTION = "timeUpdate_";
+export const CASE_SEND_GROUP_STATUS_OPTION = "sendGroupStatus_";
+export const CASE_MUTE_OPTION = "mute_";
+export const CASE_UNMUTE_OPTION = "unmute_";
+
+//Utils
+export const UTILITY_EMPTY_VALUE = " ";
+export const UTILITY_EMPTY_VALUE_WITH_TEXT = "Пусто";
+export const UTILITY_DELIMITER = ", ";
+export const UTILITY_UNDER_DEVELOPMENT_VALUE = "🛠 В разработке 🛠";
+export const UTILITY_WITH_BACK_BUTTON = "withBackButton";
+export const UTILITY_WITHOUT_BACK_BUTTON = "withoutBackButton";
+export const UTILITY_DELIMITER_FOR_DATA = "_";
+export const UTILITY_TODAY_CONTENT = "todayContent";
+export const UTILITY_TOMORROW_CONTENT = "tomorrowContent";
+
+//Navigation keys
+export const NAVIGATION_KEY_GROUPS = "groups";
+export const NAVIGATION_KEY_GROUP_OPERATIONS = "groupQueues"
+export const NAVIGATION_KEY_USER_OPERATIONS = "userQueues";
+
+//Templates
+export const TEMPLATE_OF_GROUP_SELECTION = CASE_GROUP_SELECTION_OPTION + "%s";
+export const TEMPLATE_OF_CURRENT_SELECTION = "Вы выбрали: %s";
+export const TEMPLATE_OF_CURRENT_QUEUE_SELECTION = CASE_CURRENT_QUEUE_SELECTION_OPTION + "%s_%s";
+export const TEMPLATE_OF_BACK_PREVIOUS_POSITION = CASE_BACK_PREVIOUS_POSITION_OPTION + "%s";
+export const TEMPLATE_OF_SPECIFIC_UPDATE = CASE_SPECIFIC_UPDATE_OPTION + `%s_%s_%s`;
+export const TEMPLATE_OF_CASE_SELECT_ALL_STATUS_OPTION = CASE_SELECT_ALL_STATUS_OPTION + "%s_%s_%s"
+export const TEMPLATE_OF_CASE_REMOVER_ALL_STATUS_OPTION = CASE_REMOVE_ALL_STATUS_OPTION + "%s_%s_%s"
+export const TEMPLATE_OF_CASE_SUCCESS_STATUS_RESPONSE_OPTION = CASE_SUCCESS_STATUS_RESPONSE_OPTION + "%s_%s"
+export const TEMPLATE_OF_CASE_SUBSCRIBED_OPTION = CASE_SUBSCRIBED_OPTION + "%s_%s_%s"
+export const TEMPLATE_OF_CASE_UNSUBSCRIBED_OPTION = CASE_UNSUBSCRIBED_OPTION + "%s_%s_%s"
+export const TEMPLATE_OF_CASE_SUBSCRIPTION_DECISION_OPTION = CASE_SUBSCRIPTION_DECISION_OPTION + "%s_%s"
+export const TEMPLATE_OF_CASE_SPECIFIC_SUBSCRIPTION_OPTION =  CASE_SPECIFIC_SUBSCRIPTION_OPTION + "%s_%s_%s"
+export const TEMPLATE_OF_CASE_SPECIFIC_TIME_UPDATE_OPTION = CASE_SPECIFIC_TIME_UPDATE_OPTION + "%s_%s_%s_%s"
+export const TEMPLATE_OF_CASE_SEND_GROUP_STATUS_OPTION = CASE_SEND_GROUP_STATUS_OPTION + "%s_%s_%s";
+export const TEMPLATE_OF_CASE_MUTE_OPTION = CASE_MUTE_OPTION + "%s_%s_%s";
+export const TEMPLATE_OF_CASE_UNMUTE_OPTION = CASE_UNMUTE_OPTION + "%s_%s_%s";

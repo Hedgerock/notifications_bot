@@ -1,0 +1,32 @@
+{
+  "name": "notifications",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "type": "module",
+  "scripts": {
+    "db:test:up": "docker-compose --env-file .test.env -f docker-compose.test.yaml up -d",
+    "db:test:down": "docker-compose --env-file .test.env -f docker-compose.test.yaml down -v",
+    "test": "cross-env NODE_ENV=test pnpm run db:test:up && (node --experimental-vm-modules node_modules/jest/bin/jest.js && pnpm run db:test:down || pnpm run db:test:down)",
+    "start": "node app.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bull": "^4.16.5",
+    "express": "^5.2.1",
+    "jsonwebtoken": "^9.0.3",
+    "node-telegram-bot-api": "^0.67.0",
+    "pg": "^8.20.0",
+    "pg-hstore": "^2.3.4",
+    "puppeteer": "^24.40.0",
+    "redis": "^5.11.0",
+    "sequelize": "^6.37.8"
+  },
+  "devDependencies": {
+    "@types/jest": "^30.0.0",
+    "cross-env": "^10.1.0",
+    "jest": "^30.3.0"
+  }
+}
