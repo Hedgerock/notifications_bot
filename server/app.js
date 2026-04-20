@@ -23,30 +23,30 @@ import {AppCoreConstants} from "./constants/AppCoreConstantsClass.js";
 export async function startServer() {
     const server = express();
 
-    if (process.env.NODE_ENV !== "test") {
-        /**
-         * @implements Startable
-         */
-        const services = [AppCoreConstants, getQueue(), getScrapper(), getHtmlService()]
-
-        for (const service of services) {
-            await service.init();
-            await new Promise(res => setTimeout(res, IntervalTimeConstants.TIME_BETWEEN_SERVICE_INIT_IN_MILLIS));
-        }
-    }
-
-    server.use(express.static(path.join(AppCoreConstants.ROOT_DIR, "public")))
-    server.use(express.json());
-
-    setInterval(checkUpdates, IntervalTimeConstants.SCRAPPER_INTERVAL_TIMEOUT_IN_MILLIS);
-    setInterval(sessionCleanerWorker, IntervalTimeConstants.SESSION_CLEANER_TIME_IN_MILLIS);
-    setInterval(scheduleNotificationsWorker, IntervalTimeConstants.SCHEDULE_NOTIFICATION_TIME_IN_MILLIS);
-    startNotificationWorker();
-
     server.use("", appRouter);
 
     server.listen(AppCoreConstants.SERVER_PORT_VALUE, async() => {
         console.log(`Server running at http://localhost:${AppCoreConstants.SERVER_PORT_VALUE}`);
+
+        if (process.env.NODE_ENV !== "test") {
+            /**
+             * @implements Startable
+             */
+            const services = [AppCoreConstants, getQueue(), getScrapper(), getHtmlService()]
+
+            for (const service of services) {
+                await service.init();
+                await new Promise(res => setTimeout(res, IntervalTimeConstants.TIME_BETWEEN_SERVICE_INIT_IN_MILLIS));
+            }
+        }
+
+        server.use(express.static(path.join(AppCoreConstants.ROOT_DIR, "public")))
+        server.use(express.json());
+
+        setInterval(checkUpdates, IntervalTimeConstants.SCRAPPER_INTERVAL_TIMEOUT_IN_MILLIS);
+        setInterval(sessionCleanerWorker, IntervalTimeConstants.SESSION_CLEANER_TIME_IN_MILLIS);
+        setInterval(scheduleNotificationsWorker, IntervalTimeConstants.SCHEDULE_NOTIFICATION_TIME_IN_MILLIS);
+        startNotificationWorker();
 
         AppCoreConstants.TELEGRAM_BOT.onText(/\/start/, botOnStartFunction);
         AppCoreConstants.TELEGRAM_BOT.onText(/\/status/, withUserCheck(async (msg) => {
