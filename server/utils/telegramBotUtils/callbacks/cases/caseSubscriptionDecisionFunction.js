@@ -68,8 +68,6 @@ export async function caseSubscriptionDecisionFunction(query, data) {
                 group.is_subscriber !== groupStatus ||
                 group.time_until_notification_id !== groupTimeId
 
-            if (group.is_muted !== groupMutedStatus)
-
             if (isNewGroupData) {
                 await groupService.updateGroup(currentId, {
                     is_subscriber: groupStatus,
