@@ -12,6 +12,7 @@ RUN apt-get update && apt-get install -y \
     chromium \
     libnss3 libatk1.0-0 libx11-6 libxcomposite1 libxrandr2 \
     libgbm1 libasound2 fonts-liberation \
+    libxss1 libxdamage1 libxi6 libxtst6 libcups2 libdrm2 \
     && rm -rf /var/lib/apt/lists/*
 
 RUN npm install -g pnpm

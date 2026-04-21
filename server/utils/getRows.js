@@ -11,7 +11,14 @@ export async function getRows(){
     const browser = process.env.PUPPETEER_EXECUTABLE_PATH
         ? await puppeteer.launch({
             executablePath: process.env.PUPPETEER_EXECUTABLE_PATH,
-            args: ['--no-sandbox', '--disable-setuid-sandbox']
+            args: [
+                '--no-sandbox',
+                '--disable-setuid-sandbox',
+                '--disable-dev-shm-usage',
+                '--disable-gpu',
+                '--disable-software-restarizer'
+            ],
+            timeout: 60_000
         })
         : await puppeteer.launch({
             headless: true
