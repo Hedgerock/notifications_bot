@@ -57,7 +57,7 @@ Producer (API / Bot)
 * Redis (Queue storage / state management)
 * Bull / Queue system (job processing)
 * Docker (containerization)
-* Express (API layer, if used)
+* Express
 
 ---
 
