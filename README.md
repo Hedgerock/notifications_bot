@@ -1,69 +1,110 @@
-# Telegram Notifications Bot
+# 📬 Notifications Bot / Notification System
 
-## 🚀 О проекте
+## 🧠 Overview
 
-Сервис для асинхронной отправки уведомлений через Telegram с использованием очередей.
+This project is a backend notification system designed to handle **scheduled and real-time message delivery** using a queue-based architecture.
 
-## 🚀 Цель проекта
-Следить за актуальным состоянием графиков отключения света и в случае изменений присылать уведомление пользователям системы 
+The system is built to simulate production-like behavior with:
 
-## 🧠 Архитектура
+* asynchronous task processing
+* retry mechanisms
+* scalable background workers
+* decoupled architecture
 
-* API / Bot layer (Telegram)
-* Worker (обработка задач)
-* Queue (Bull + Redis)
-* Database (PostgreSQL + Sequelize)
+It demonstrates how modern backend systems handle **reliable message delivery at scale**.
 
-## 🛠️ Стек
+---
 
-* Node.js
-* Bull (job queue)
-* Redis
-* PostgreSQL
-* Sequelize
-* Docker Compose
-* Puppeteer
+## ⚙️ Key Features
 
-## ⚙️ Как запустить
-Нужен .env файл с переменными в корне проекта:
-* REDIS_URL
-* REDIS_PORT
-* POSTGRES_HOST
-* POSTGRES_USER
-* POSTGRES_PASSWORD
-* POSTGRES_DATABASE
-* POSTGRES_PORT
-* DATABASE_PORT
-* SERVER_PORT
-* SERVER_PORT_VALUE
-* TELEGRAM_TOKEN
-* JWT_SECRET
-* ADMIN_USER
-* ADMIN_PASS
-* WEBSITE_URL
-* SELECTOR_FOR_WAIT
-* SELECTOR_TO_WORK
-* BUTTON_FOR_TOMORROW_SCHEDULE
-* STATUS_ENABLE
-* STATUS_PROBABLY
-* STATUS_OFF
-* STATUS_SURE_OFF
-* QUEUE_LIMIT_MAX
-* QUEUE_LIMIT_DURATION
-* DOMAIN
-```bash
-  make turnUp
+* 📩 Scheduled and immediate notifications
+* 🔁 Retry mechanism for failed jobs
+* 🧵 Asynchronous job processing via queue system
+* 📊 Background worker-based architecture
+* 🧩 Decoupled services for better scalability
+* 🧪 Fault-tolerant processing logic
+
+---
+
+## 🏗️ Architecture
+
+The system follows a **queue-based event-driven architecture**:
+
+```
+Producer (API / Bot)
+        ↓
+   Job Queue
+        ↓
+ Background Workers
+        ↓
+ Notification Service
+        ↓
+ Delivery (Telegram / external channel)
 ```
 
-## 📦 Что реализовано
-* асинхронная очередь уведомлений
-* обработка задач через workers
-* хранение данных в PostgreSQL
-* масштабируемая архитектура
+### Core components:
 
-## 📈 Почему это важно
+* **Producer** – receives user requests and pushes jobs to queue
+* **Queue Layer** – manages job scheduling and retry logic
+* **Workers** – process jobs asynchronously
+* **Delivery Layer** – sends final notifications
 
-Проект демонстрирует работу с:
-* очередями (background jobs)
-* микросервисным подходом (разделение worker / bot)
-* контейнеризацией
+---
+
+## 🔧 Tech Stack
+
+* Node.js (Backend runtime)
+* Redis (Queue storage / state management)
+* Bull / Queue system (job processing)
+* Docker (containerization)
+* Express (API layer, if used)
+
+---
+
+## 🧠 Engineering Decisions
+
+### 1. Queue-based architecture
+
+Used to decouple request handling from execution, improving scalability and reliability.
+
+### 2. Retry mechanism
+
+Failed jobs are automatically retried to ensure delivery guarantees.
+
+### 3. Background workers
+
+Processing is fully asynchronous to avoid blocking main API flow.
+
+### 4. Separation of concerns
+
+Producer, queue, and worker layers are isolated for maintainability.
+
+---
+
+## 📈 What this project demonstrates
+
+This project showcases understanding of:
+
+* backend system design
+* asynchronous processing
+* distributed job handling concepts
+* fault-tolerant architecture
+* scalable backend patterns
+
+---
+
+## 🚀 Future improvements
+
+* Rate limiting per user
+* Priority queues
+* Multi-channel delivery (Email, SMS, Webhooks)
+* Monitoring & logging system
+* Metrics dashboard
+
+---
+
+## 🧑‍💻 Author
+
+Backend Developer focused on scalable systems and distributed architectures.
+
+GitHub: https://github.com/Hedgerock
